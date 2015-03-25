@@ -1,2 +1,2 @@
-cookbook-apc
+phpenv-apc
 ===============
