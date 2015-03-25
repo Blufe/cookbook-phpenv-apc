@@ -7,5 +7,5 @@
 # All rights reserved - Do Not Redistribute
 #
 
-include_recipe "module::install_apc"
-include_recipe "module::configure_apc"
+include_recipe "phpenv-apc::install"
+include_recipe "phpenv-apc::configure"
