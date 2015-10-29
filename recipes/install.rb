@@ -20,7 +20,7 @@ ruby_block "phpenv-apc::install#set-env-phpenv" do
 end
 
 # http://pecl.php.net/get/APC-#{node["phpenv"]["apc"]["version"]}.tgz
-remote_file File.join(node["phpenv"]["apc"]["src_dir"], "#{node["phpenv"]["apc"]["module_name"]}-#{node["phpenv"]["apc"]["version"]}.tgz")
+remote_file File.join(node["phpenv"]["apc"]["src_dir"], "#{node["phpenv"]["apc"]["module_name"]}-#{node["phpenv"]["apc"]["version"]}.tgz") do
   source "http://pecl.php.net/get/#{node["phpenv"]["apc"]["module_name"]}-#{node["phpenv"]["apc"]["version"]}.tgz"
   owner  node["phpenv"]["user"]
   group  node["phpenv"]["group"]
