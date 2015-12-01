@@ -36,6 +36,7 @@ bash "compile apc" do
     eval "$(phpenv init -)"
     phpize
     ./configure --enable-#{node["phpenv"]["apc"]["module_name"]} --with-apxs
+    make clean
     make
     make install
   EOH
