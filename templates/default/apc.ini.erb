@@ -1,6 +1,6 @@
-[apc]
+[<%= node["phpenv"]["apc"]["module_name"] %>]
 ; Enable apc extension module
-extension = apc.so
+extension = <%= node["phpenv"]["apc"]["module_name"] %>.so
 
 ; Options for the APC module version >= 3.1.3
 ; See http://www.php.net/manual/en/apc.configuration.php
@@ -11,7 +11,7 @@ extension = apc.so
 apc.enable_opcode_cache=1
 
 ; This can be set to 0 to disable APC. 
-;apc.enabled=1
+apc.enabled=1
 
 ; The size of each shared memory segment, with M/G suffixe
 apc.shm_size=64M
@@ -55,7 +55,7 @@ apc.mmap_file_mask=/tmp/apc.XXXXXX
 ;apc.file_update_protection=2
 
 ; Setting this enables APC for the CLI version of PHP (Mostly for testing and debugging).
-;apc.enable_cli=0
+apc.enable_cli=1
 
 ; Prevents large files from being cached
 ;apc.max_file_size=1M

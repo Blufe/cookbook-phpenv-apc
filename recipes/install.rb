@@ -20,9 +20,8 @@ ruby_block "phpenv-apc::install#set-env-phpenv" do
 end
 
 # http://pecl.php.net/get/APC-#{node["phpenv"]["apc"]["version"]}.tgz
-cookbook_file "APC-#{node["phpenv"]["apc"]["version"]}" do
-  source "APC-#{node["phpenv"]["apc"]["version"]}.tgz"
-  path   File.join(node["phpenv"]["apc"]["src_dir"], "APC-#{node["phpenv"]["apc"]["version"]}.tgz")
+remote_file File.join(node["phpenv"]["apc"]["src_dir"], "#{node["phpenv"]["apc"]["module_name"]}-#{node["phpenv"]["apc"]["version"]}.tgz") do
+  source "http://pecl.php.net/get/#{node["phpenv"]["apc"]["module_name"]}-#{node["phpenv"]["apc"]["version"]}.tgz"
   owner  node["phpenv"]["user"]
   group  node["phpenv"]["group"]
   action :create_if_missing
@@ -32,11 +31,12 @@ bash "compile apc" do
   user  node["phpenv"]["user"]
   group node["phpenv"]["group"]
   code <<-EOH
-    tar zxvf APC-#{node["phpenv"]["apc"]["version"]}.tgz
-    cd APC-#{node["phpenv"]["apc"]["version"]}
+    tar zxvf #{node["phpenv"]["apc"]["module_name"]}-#{node["phpenv"]["apc"]["version"]}.tgz
+    cd #{node["phpenv"]["apc"]["module_name"]}-#{node["phpenv"]["apc"]["version"]}
     eval "$(phpenv init -)"
     phpize
-    ./configure --enable-apc --with-apxs
+    ./configure --enable-#{node["phpenv"]["apc"]["module_name"]} --with-apxs
+    make clean
     make
     make install
   EOH
